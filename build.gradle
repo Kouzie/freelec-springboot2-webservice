@@ -10,14 +10,22 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
+
 }
 
 // 자바 스프링 부트 필수 플러그인
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'org.springframework.boot' version '2.1.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id "com.gradle.build-scan" version "1.16"
+}
 
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
 
 
 group 'com.kouzie.book'
@@ -30,7 +38,16 @@ repositories {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.projectlombok:lombok'
+    compile 'com.h2database:h2'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-mustache'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    compile 'org.springframework.session:spring-session-jdbc'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.security:spring-security-test'
 }
